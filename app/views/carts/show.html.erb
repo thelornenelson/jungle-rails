@@ -4,6 +4,14 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if cart.empty? %>
+
+    <div class="order-summary jumbotron">
+      <h4>You don't have anything in your cart! Why not <%= link_to 'go shopping?', :root %></h4>
+    </div>
+
+  <% else %>
+
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -49,5 +57,7 @@
       <% end %>
     </div>
   </div>
+
+  <% end %>
 
 </section>
