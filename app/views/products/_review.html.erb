@@ -1,12 +1,14 @@
-<dl class="dl-horizontal">
-  <dt>Rating</dt>
-  <dd><%= review.rating %></dd>
-  <dt>Name</dt>
-  <dd><%= review.user.first_name %></dd>
-  <dt>Description</dt>
-  <dd><%= review.description %></dd>
-  <% if review.user == current_user %>
-    <dd><%= link_to 'Delete', product_review_url(product, review),
-            data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger' %></dd>
-  <% end %>
-</dl>
+<li class="list-group-item">
+  <dl class="dl-horizontal">
+    <dt>Rating</dt>
+    <dd><%= review.rating %> / 5</dd>
+    <dt>Reviewer</dt>
+    <dd><%= review.user.first_name %>
+      <% if review.user == current_user %>
+        <%= link_to 'Delete', product_review_url(product, review),
+                data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger btn-xs' %>
+      <% end %></dd>
+    <dt>Review</dt>
+    <dd><%= review.description %></dd>
+  </dl>
+</li>

@@ -8,8 +8,11 @@ class ReviewsController < ApplicationController
     @review.user = current_user
     @review.save
 
-    redirect_to @product
+    if @review.errors.any?
+      session[:review_errors] = @review.errors
+    end
 
+    redirect_to @product
   end
 
   def destroy

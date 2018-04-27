@@ -23,25 +23,32 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
         </dl>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-2">
+            <% if @reviews.any? || current_user %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Reviews</h3>
+              </div>
+              <div class="panel-body">
+                <% if current_user %>
+                <%= render 'review_form', review: @review, product: @product %>
+                <% end %>
+              </div>
+              <ul class="list-group">
+                <% unless @reviews.empty? %>
+                <% @reviews.each do |review| %>
+                <%= render 'review', review: review, product: @product %>
+                <% end %>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 
   </article>
-
-  <% if current_user %>
-    <%= render 'review_form', review: @review, product: @product %>
-  <% end %>
-
-  <% unless @reviews.empty? %>
-    <div class="row">
-      <div class="col-sm-12">
-        <h2>Reviews</h2>
-        <% @reviews.each do |review| %>
-        <%= render 'review', review: review, product: @product %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-
 
 </section>
