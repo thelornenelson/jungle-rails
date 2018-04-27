@@ -26,6 +26,30 @@
       </div>
     </div>
     <div class="row">
+      <%= form_for @review, url: product_reviews_path(@product) do |form| %>
+
+        <% if form.object.errors.any? %>
+          <div class="alert alert-danger">
+            <strong>The following errors prevented saving:</strong>
+            <ul>
+              <% form.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :rating %>
+          <%= form.select(:rating, options_for_select([['0', 0], ['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]])) %>
+          <%= form.label :description %>
+          <%= form.text_field :description, class: 'form-control' %>
+        </div>
+
+        <%= form.submit 'Add Review', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="row">
       <h2>Reviews</h2>
       <% @product.reviews.each do |review| %>
       <%= render 'review', review: review %>
