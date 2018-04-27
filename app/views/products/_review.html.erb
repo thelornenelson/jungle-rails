@@ -5,4 +5,8 @@
   <dd><%= review.user.first_name %></dd>
   <dt>Description</dt>
   <dd><%= review.description %></dd>
+  <% if review.user == current_user %>
+    <dd><%= link_to 'Delete', product_review_url(product, review),
+            data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger' %></dd>
+  <% end %>
 </dl>
