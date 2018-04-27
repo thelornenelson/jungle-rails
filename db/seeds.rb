@@ -33,9 +33,12 @@ cat3 = Category.find_or_create_by! name: 'Furniture'
 
 puts "Re-creating Products ..."
 
+LineItem.destroy_all
+Order.destroy_all
+Review.destroy_all
 Product.destroy_all
 
-cat1.products.create!({
+prod1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -51,7 +54,7 @@ cat1.products.create!({
   price: 124.99
 })
 
-cat1.products.create!({
+prod2 = cat1.products.create!({
   name:  'Hipster Hat',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel3.jpg'),
@@ -92,7 +95,7 @@ cat2.products.create!({
   price: 164.49
 })
 
-cat2.products.create!({
+prod3 = cat2.products.create!({
   name:  'Hotdog Slicer',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('electronics2.jpg'),
@@ -108,7 +111,7 @@ cat2.products.create!({
   price: 2_026.29
 })
 
-cat3.products.create!({
+prod4 = cat3.products.create!({
   name:  'Optimal Sleeping Bed',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture1.jpg'),
@@ -116,7 +119,7 @@ cat3.products.create!({
   price: 3_052.00
 })
 
-cat3.products.create!({
+prod5 = cat3.products.create!({
   name:  'Electric Chair',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture2.jpg'),
@@ -132,5 +135,51 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## Users
+
+puts "Re-creating Users ..."
+
+User.destroy_all
+
+usr1 = User.create!({
+  first_name: 'Tester',
+  last_name: 'Test',
+  email: 'test@test.test',
+  password_digest: '$2a$10$42bWTQq3Onu826p3N.0M6e8ZR5u0yY7NjuP0sjgaw2NWLTIWphIw.'
+  })
+
+## Reviews
+
+puts "Re-creating Reviews ..."
+
+prod1.reviews.create!({
+  user: usr1,
+  description: "Tacos gentrify cornhole iceland fashion axe jean shorts. ",
+  rating: 4
+  })
+
+prod2.reviews.create!({
+  user: usr1,
+  description: "Authentic iceland tousled chambray portland tattooed echo park swag meh irony.",
+  rating: 5
+  })
+
+prod3.reviews.create!({
+  user: usr1,
+  description: "Ethical tbh banh mi iceland, authentic bicycle rights locavore hella fam before they sold out",
+  rating: 2
+  })
+
+prod4.reviews.create!({
+  user: usr1,
+  description: "Mixtape selvage prism viral, direct trade bespoke la croix pabst vegan. ",
+  rating: 3
+  })
+
+prod5.reviews.create!({
+  user: usr1,
+  description: "Messenger bag edison bulb affogato viral leggings.",
+  rating: 0
+  })
 
 puts "DONE!"
