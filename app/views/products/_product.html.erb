@@ -8,11 +8,7 @@
   <p class="description">
     <%= product.description %>
   </p>
-  <% if product.reviews.any? %>
-    <p>
-      <%= product.reviews.average(:rating).round(1) %> / 5
-    </p>
-  <% end %>
+
 
   <footer class="actions">
     <%= link_to add_item_cart_path(product_id: product.id), class: 'btn btn-primary', method: :put do %>
@@ -29,6 +25,10 @@
   <% if product.quantity.zero? %>
     <aside class="sold-out">
       SOLD OUT!
+    </aside>
+  <% elsif product.reviews.any? %>
+    <aside class="rating">
+      <%= product.reviews.average(:rating).round(1) %> / 5
     </aside>
   <% end %>
 </article>
