@@ -145,7 +145,8 @@ usr1 = User.create!({
   first_name: 'Tester',
   last_name: 'Test',
   email: 'test@test.test',
-  password_digest: '$2a$10$42bWTQq3Onu826p3N.0M6e8ZR5u0yY7NjuP0sjgaw2NWLTIWphIw.'
+  password: 'testtest',
+  password_confirmation: 'testtest'
   })
 
 ## Reviews
