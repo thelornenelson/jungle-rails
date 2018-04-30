@@ -43,21 +43,34 @@ RSpec.describe User, type: :model do
         password: 'testtest',
         password_confirmation: 'testtest'
         })
-        expect(@user2).not_to be_valid
-        expect(@user2.errors.full_messages).to include "Email has already been taken"
-      end
+      expect(@user2).not_to be_valid
+      expect(@user2.errors.full_messages).to include "Email has already been taken"
+    end
 
-      it 'should not be valid if password and password_confirmation do not match' do
-        user.password_confirmation = 'blahblah'
-        expect(user).not_to be_valid
-      end
+    it 'should not be valid if email is already registered, even if case if different' do
+      user.save
+      @user2 = User.new({
+        first_name: 'Fname',
+        last_name: 'Lname',
+        email: 'Test@test.test',
+        password: 'testtest',
+        password_confirmation: 'testtest'
+      })
+      expect(@user2).not_to be_valid
+      expect(@user2.errors.full_messages).to include "Email has already been taken"
+    end
 
-      it 'should not be valid if password is too short' do
-        user.password = 'test'
-        user.password_confirmation = 'test'
-        expect(user).not_to be_valid
-        expect(user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
-      end
+    it 'should not be valid if password and password_confirmation do not match' do
+      user.password_confirmation = 'blahblah'
+      expect(user).not_to be_valid
+    end
+
+    it 'should not be valid if password is too short' do
+      user.password = 'test'
+      user.password_confirmation = 'test'
+      expect(user).not_to be_valid
+      expect(user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
+    end
   end
 
   describe '.authenticate_with_credentials' do
@@ -70,6 +83,16 @@ RSpec.describe User, type: :model do
     it 'should return a user if email and password are valid' do
       user.save
       expect(User.authenticate_with_credentials("test@test.test", "testtest")).to be_instance_of User
+    end
+
+    it 'should allow login when email is padded with extra spaces' do
+      user.save
+      expect(User.authenticate_with_credentials(" test@test.test ", "testtest")).to be_instance_of User
+    end
+
+    it 'should allow login if email is entered with incorrect case' do
+      user.save
+      expect(User.authenticate_with_credentials("TEst@test.test", "testtest")).to be_instance_of User
     end
   end
 
