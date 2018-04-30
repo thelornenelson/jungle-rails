@@ -1,6 +1,16 @@
 # Jungle
 
-A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
+A mini e-commerce application built with Rails 4.2; an exercise to practice working with an existing code base while implementing new features and existing bugs. The project gave a good introduction to Rails and from the basic code provided I implemented many additional features:
+
+- User registration
+- Session handling
+- Administrator password protection
+- Category addition, order confirmations
+- The "sold out" product highlights
+- The product review postings and listings
+- Automated tests for Users and Products models, with Rspec
+
+This helped develop a familiarity with Models, Views, and Controllers in Rails, as well as defining appropriate routes, and creating migrations and seed data.
 
 ## Features
 
@@ -15,6 +25,10 @@ A mini e-commerce application built with Rails 4.2 for purposes of teaching Rail
 !["Adding Review"](https://github.com/thelornenelson/jungle-rails/blob/master/docs/product-detail-adding-review.png)
 !["Viewing Product Details"](https://github.com/thelornenelson/jungle-rails/blob/master/docs/product-detail-with-review.png)
 !["Order Confirmation"](https://github.com/thelornenelson/jungle-rails/blob/master/docs/order-confirmation.png)
+
+## Deployment
+
+This project was also deployed to [Heroku](https://fast-waters-47584.herokuapp.com/)
 
 ## Setup
 
