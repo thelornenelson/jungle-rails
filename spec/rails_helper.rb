@@ -13,6 +13,17 @@ require "capybara/poltergeist"
 
 Capybara.javascript_driver = :poltergeist
 
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    phantomjs_options: %w[
+      --ssl-protocol=[tlsv1.2]
+    ]
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+
+Capybara.default_max_wait_time = 10
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

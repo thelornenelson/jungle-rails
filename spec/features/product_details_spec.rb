@@ -16,7 +16,7 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
     end
   end
 
-  scenario "They navigate to a product detail page from the home page by clicking on a product" do
+  scenario "They navigate to a product detail page from the home page by clicking on a product link" do
     visit root_path
 
     # click on
@@ -24,7 +24,18 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
 
     expect(page).to have_css 'section.products-show'
 
-    save_screenshot
+  end
+
+  scenario "They navigate to a product detail page from the home page by clicking on a product detail button" do
+    visit root_path
+
+    # click on
+    within first('article.product') do
+      click_on "Details"
+    end
+
+    expect(page).to have_css 'section.products-show'
+
   end
 
   scenario "They can view details for the correct product on the product detail page" do
